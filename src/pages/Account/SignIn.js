@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoLight } from "../../assets/images";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   // ============= Initial State Start here =============
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,22 +28,41 @@ const SignIn = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
+    const correctEmail = "test1@gmail.com";
+    const correctPassword = "test123";
+
+    const passwordRegex = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/;
+
     if (!email) {
-      setErrEmail("Enter your email");
+      setErrEmail("Email is required.");
+    } else if (email !== correctEmail) {
+      setErrEmail("Invalid email. Please check your email.");
+    } else {
+      setErrEmail("");
     }
 
     if (!password) {
-      setErrPassword("Create a password");
+      setErrPassword("Password is required.");
+    } else if (password !== correctPassword) {
+      setErrPassword("Incorrect password. Please try again.");
+    } else if (password && !passwordRegex.test(password)) {
+      setErrPassword(
+        "Password must be at least 8 characters long and contain at least one letter and one number."
+      );
+    } else {
+      setErrPassword("");
     }
-    // ============== Getting the value ==============
-    if (email && password) {
+
+    if (email === correctEmail && password === correctPassword) {
       setSuccessMsg(
         `Hello dear, Thank you for your attempt. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
       );
-      setEmail("");
+      setEmail(""); // Resetting fields after successful sign-in
       setPassword("");
+      navigate("/");
     }
   };
+
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="w-1/2 hidden lgl:inline-flex h-full text-white">
@@ -65,7 +85,6 @@ const SignIn = () => {
                 Get started fast with Sush plants
               </span>
               <br />
-              
             </p>
           </div>
           <div className="w-[300px] flex items-start gap-3">
@@ -77,7 +96,6 @@ const SignIn = () => {
                 Access all sushplant services
               </span>
               <br />
-              
             </p>
           </div>
           <div className="w-[300px] flex items-start gap-3">
@@ -89,7 +107,6 @@ const SignIn = () => {
                 Trusted by online Shoppers
               </span>
               <br />
-              
             </p>
           </div>
           <div className="flex items-center justify-between mt-10">

@@ -22,23 +22,18 @@ export const navBarList = [
   },
   {
     _id: 1002,
-    title: "Shop",
-    link: "/shop",
-  },
-  {
-    _id: 1003,
     title: "About",
     link: "/about",
   },
   {
-    _id: 1004,
+    _id: 1003,
     title: "Contact",
     link: "contact",
   },
   {
-    _id: 1005,
+    _id: 1004,
     title: "Journal",
-    link: "/journal",
+    link: "journal",
   },
 ];
 // =================== NavBarList End here ======================
@@ -303,5 +298,5 @@ export const paginationItems = [
     badge: true,
     des: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic excepturi quibusdam odio deleniti reprehenderit facilis.",
   },
- ];
+];
 // =================== PaginationItems End here =================
